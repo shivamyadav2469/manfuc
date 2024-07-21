@@ -19,7 +19,11 @@ The data is stored in a JSON file located in `src/data/india-agro-dataset.json`.
 - Node.js (version 16+ recommended)
 - npm or yarn
 
+## Screenshots 
+![Screenshot 1](./public/Screenshot1.png)
+![Screenshot 2](./public/Screenshot2.png)
+
 ### Installation
 1. Clone the repository:
    ```sh
-   git clone <repository-url>
+   git clone https://github.com/shivamyadav2469/manfuc.git
