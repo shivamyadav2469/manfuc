@@ -14,6 +14,14 @@ The data is stored in a JSON file located in `src/data/india-agro-dataset.json`.
 - `dataProcessing.ts`: Contains functions for processing the dataset.
 
 ## Getting Started
+yarn run dev
+# or
+npm run dev
+
+## Create a Build
+yarn run build
+# or
+npm run build 
 
 ### Prerequisites
 - Node.js (version 16+ recommended)
@@ -27,8 +35,11 @@ The data is stored in a JSON file located in `src/data/india-agro-dataset.json`.
 
 ### Installation
 1. Clone the repository:
-   ```sh
    git clone https://github.com/shivamyadav2469/manfuc.git
+cd manfuc
+yarn install
+# or
+npm install
 
 ## project live Link 
 Link:   https://manufac001.netlify.app/
