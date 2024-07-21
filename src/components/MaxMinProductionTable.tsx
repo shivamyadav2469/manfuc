@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Table, Pagination, Select } from "@mantine/core";
 import { yearlyAggregations } from "../utils/dataProcessing";
 
-const MaxMinProductionTable: React.FC = () => {
+const MaxMinProductionTable: React.FC<{ colorScheme: "light" | "dark" }> = ({
+  colorScheme,
+}) => {
+  const textColor = colorScheme === "dark" ? "#ffffff" : "#000000";
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
@@ -32,7 +35,7 @@ const MaxMinProductionTable: React.FC = () => {
   }, []);
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: "20px", color: textColor }}>
       <Table style={{ width: "100%", tableLayout: "fixed" }}>
         <thead>
           <Table.Tr>

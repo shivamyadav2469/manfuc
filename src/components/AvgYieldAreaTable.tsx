@@ -2,9 +2,12 @@ import React from "react";
 import { Table } from "@mantine/core";
 import { cropAggregations } from "../utils/dataProcessing";
 
-const AvgYieldAreaTable: React.FC = () => {
+const AvgYieldAreaTable: React.FC<{ colorScheme: "light" | "dark" }> = ({
+  colorScheme,
+}) => {
+  const textColor = colorScheme === "dark" ? "#ffffff" : "#000000";
   return (
-    <Table>
+    <Table style={{ color: textColor }}>
       <thead>
         <Table.Tr>
           <Table.Th>Crop</Table.Th>

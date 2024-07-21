@@ -1,87 +1,123 @@
-import React, { useState } from 'react';
-import { MantineProvider, Paper, Title } from '@mantine/core';
-import MaxMinProductionTable from './components/MaxMinProductionTable';
-import AvgYieldAreaTable from './components/AvgYieldAreaTable';
-import CustomNavbar from './components/Navbar';
-
-
+import React, { useState, useMemo, useEffect } from "react";
+import {
+  MantineProvider,
+  Paper,
+  Title,
+  MantineThemeOverride,
+  Loader,
+} from "@mantine/core";
+import MaxMinProductionTable from "./components/MaxMinProductionTable";
+import AvgYieldAreaTable from "./components/AvgYieldAreaTable";
+import CustomNavbar from "./components/Navbar";
 
 const App: React.FC = () => {
-  const [colorScheme, setColorScheme] = useState<'light' | 'dark'>('dark');
+  const [colorScheme, setColorScheme] = useState<"light" | "dark">("dark");
+  const [loading, setLoading] = useState(true);
 
   const toggleColorScheme = () => {
-    setColorScheme((prevScheme) => (prevScheme === 'light' ? 'dark' : 'light'));
+    setColorScheme((prevScheme) => (prevScheme === "light" ? "dark" : "light"));
   };
 
-  return (
-    <MantineProvider
-  theme={{
-    colorScheme: colorScheme,
-    colors: {
-      dark: ['#1a1a1a', '#333333', '#444444', '#555555', '#666666', '#808080', '#999999', '#b3b3b3', '#cccccc', '#e6e6e6'],
-      gray: ['#ffffff', '#f5f5f5', '#e0e0e0', '#cccccc', '#b3b3b3', '#999999', '#808080', '#666666', '#333333', '#000000'],
-    },
-    components: {
-      Paper: {
-        styles: (theme: any) => ({
-          root: {
-            backgroundColor: theme.colorScheme === 'dark' ? '#333333' : '#ffffff',
-            color: theme.colorScheme === 'dark' ? '#ffffff' : '#000000',
-          },
-        }),
+  useEffect(() => {
+    // Simulate a data fetch with a timeout
+    const fetchData = async () => {
+      setLoading(true);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+
+  const theme: MantineThemeOverride = useMemo(
+    () => ({
+      colorScheme,
+      colors: {
+        dark: [
+          "#000000",
+          "#111111",
+          "#222222",
+          "#333333",
+          "#444444",
+          "#555555",
+          "#666666",
+          "#777777",
+          "#888888",
+          "#999999",
+        ] as const,
+        light: [
+          "#ffffff",
+          "#f0f0f0",
+          "#e0e0e0",
+          "#d0d0d0",
+          "#c0c0c0",
+          "#b0b0b0",
+          "#a0a0a0",
+          "#909090",
+          "#808080",
+          "#707070",
+        ] as const,
       },
-      Title: {
-        styles: (theme: any) => ({
-          root: {
-            color: theme.colorScheme === 'dark' ? '#ffffff' : '#000000',
-          },
-        }),
-      },
-      Table: {
-        styles: (theme: any) => ({
-          root: {
-            borderColor: theme.colorScheme === 'dark' ? '#555555' : '#cccccc',
-            color: theme.colorScheme === 'dark' ? '#ffffff' : '#000000',
-          },
-          thead: {
-            backgroundColor: theme.colorScheme === 'dark' ? '#444444' : '#e0e0e0',
-          },
-          tbody: {
-            backgroundColor: theme.colorScheme === 'dark' ? '#333333' : '#ffffff',
-          },
-        }),
-      },
-      Button: {
-        styles: (theme: any) => ({
-          root: {
-            backgroundColor: theme.colorScheme === 'dark' ? '#444444' : '#f0f0f0',
-            color: theme.colorScheme === 'dark' ? '#ffffff' : '#000000',
-            border: `1px solid ${theme.colorScheme === 'dark' ? '#555555' : '#cccccc'}`,
-            '&:hover': {
-              backgroundColor: theme.colorScheme === 'dark' ? '#555555' : '#e0e0e0',
+      components: {
+        Paper: {
+          styles: (theme: any) => ({
+            root: {
+              backgroundColor:
+                colorScheme === "dark"
+                  ? theme.colors.dark[3]
+                  : theme.colors.light[0],
             },
-          },
-        }),
+          }),
+        },
+        Title: {
+          styles: (theme: any) => ({
+            root: {
+              color:
+                colorScheme === "dark"
+                  ? theme.colors.light[0]
+                  : theme.colors.dark[3],
+            },
+          }),
+        },
       },
-    },
-  }}
->
+    }),
+    [colorScheme]
+  );
 
+  return (
+    <MantineProvider theme={theme}>
       <div>
-        <CustomNavbar toggleColorScheme={toggleColorScheme} colorScheme={colorScheme} />
+        <CustomNavbar
+          toggleColorScheme={toggleColorScheme}
+          colorScheme={colorScheme}
+        />
       </div>
-      <div style={{ padding: '20px', display: 'flex', gap: '2rem', flexDirection: 'column' }}>
-        <Paper shadow="xl" radius="lg" p="xl">
-          <Title order={2}>Yearly Crop Aggregations</Title>
-          <MaxMinProductionTable />
-        </Paper>
+      <div
+        style={{
+          padding: "20px",
+          display: "flex",
+          gap: "2rem",
+          flexDirection: "column",
+        }}
+      >
+        {loading ? (
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+          <Loader color="violet" size="lg" />
+          </div>
+        ) : (
+          <>
+            <Paper shadow="xl" radius="lg" p="xl">
+              <Title order={2}>Yearly Crop Aggregations</Title>
+              <MaxMinProductionTable colorScheme={colorScheme} />
+            </Paper>
 
-        <Paper shadow="xl" radius="lg" p="xl">
-          <Title order={2} style={{ marginTop: '20px' }}>
-            Crop Averages (1950-2020)
-          </Title>
-          <AvgYieldAreaTable  />
-        </Paper>
+            <Paper shadow="xl" radius="lg" p="xl">
+              <Title order={2} style={{ marginTop: "20px" }}>
+                Crop Averages (1950-2020)
+              </Title>
+              <AvgYieldAreaTable colorScheme={colorScheme} />
+            </Paper>
+          </>
+        )}
       </div>
     </MantineProvider>
   );

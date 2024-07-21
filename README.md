@@ -20,10 +20,15 @@ The data is stored in a JSON file located in `src/data/india-agro-dataset.json`.
 - npm or yarn
 
 ## Screenshots 
+## 1 axMinProductionTable
 ![Screenshot 1](./public/Screenshot1.png)
+## 2 axMinProductionTable
 ![Screenshot 2](./public/Screenshot2.png)
 
 ### Installation
 1. Clone the repository:
    ```sh
    git clone https://github.com/shivamyadav2469/manfuc.git
+
+## project live Link 
+Link:   https://manufac001.netlify.app/
