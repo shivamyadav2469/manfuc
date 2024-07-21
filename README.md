@@ -27,9 +27,7 @@ npm run dev
 ## Create a Build
 
 yarn run build
-
 # or
-
 npm run build
 
 ### Prerequisites
@@ -54,7 +52,7 @@ npm run build
 
 - cd manfuc
 - yarn install
-
+# or
 - npm install
 
 ## project live Link
