@@ -20,9 +20,9 @@ The data is stored in a JSON file located in `src/data/india-agro-dataset.json`.
 - npm or yarn
 
 ## Screenshots 
-## 1 axMinProductionTable
+## 1 MaxMinProductionTable
 ![Screenshot 1](./public/Screenshot1.png)
-## 2 axMinProductionTable
+## 2 AvgYieldAreaTable
 ![Screenshot 2](./public/Screenshot2.png)
 
 ### Installation
